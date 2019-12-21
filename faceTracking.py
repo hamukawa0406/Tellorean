@@ -1,6 +1,7 @@
 import sys
 import traceback
 import tellopy
+import dlib
 import av
 import cv2.cv2 as cv2  # for avoidance of pylint error
 import numpy
@@ -10,6 +11,7 @@ import time
 def main():
     drone = tellopy.Tello()
     face_cascade = 'haarcascade_frontalface_default.xml'
+    face_dlib = dlib.get_frontal_face_detector()
     cascade = cv2.CascadeClassifier(face_cascade)
 
     try:
@@ -37,11 +39,17 @@ def main():
                 image = cv2.cvtColor(numpy.array(frame.to_image()), cv2.COLOR_RGB2BGR)
                 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
                 # #カスケードファイルと使って顔認証
-                faces = cascade.detectMultiScale(image)
+                #faces = cascade.detectMultiScale(image)
+                faces = face_dlib(image, 1)
+                '''
                 for (x, y, w, h) in faces:
                     cv2.rectangle(image, (x,y),(x+w,y+h),(255,0,0),2)
+                '''
+                for i, face_rect in enumerate(faces):
+                    #ここが処理部分
+                    cv2.rectangle(image, tuple([face_rect.left(),face_rect.top()]), tuple([face_rect.right(),face_rect.bottom()]), (0, 0,255), thickness=2)
                 cv2.imshow('Original', image)
-                cv2.imshow('Gray', gray)
+                #cv2.imshow('Gray', gray)
                 cv2.waitKey(1)
                 if frame.time_base < 1.0/60:
                     time_base = 1.0/60
@@ -57,20 +65,6 @@ def main():
     finally:
         drone.quit()
         cv2.destroyAllWindows()
-
-#
-#img = cv2.imread('img.jpg')
-#gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-#カスケードファイルの読み込み
-#face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-#カスケードファイルと使って顔認証
-#faces = face_cascade.detectMultiScale(gray)
-#for (x,y,w,h) in faces:
-#    #顔部分を四角で囲う
-#    cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
-#    cv2.imshow('img',img)
-#    cv2.waitKey(0)
-#    cv2.destroyAllWindows()
 
 if __name__ == '__main__':
     main()
