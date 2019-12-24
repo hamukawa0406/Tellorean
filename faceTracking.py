@@ -8,6 +8,46 @@ import numpy
 import time
 
 
+def tracking(drone, image, x, y):
+    global preX
+    global preY
+    print(x, " ", y)
+    cv2.rectangle(image, (x, y), (x+3, y+3), (255, 0, 255), 2)
+    if x < IMAGE_WIDTH / 2 * 0.3 :
+        print("左端")
+        drone.set_yaw(-0.7)
+    elif x < IMAGE_WIDTH / 2 * 0.8 :
+        print("左中")
+        drone.set_yaw(-0.3)
+    elif x > IMAGE_WIDTH - (IMAGE_WIDTH / 2 * 0.3):
+        print("右端")
+        drone.set_yaw(0.7)
+    elif x > IMAGE_WIDTH - (IMAGE_WIDTH / 2 * 0.8) : 
+        print("右中")
+        drone.set_yaw(0.3)
+    else : 
+        print("真ん中")
+        drone.set_yaw(0)
+
+    if y < IMAGE_HEIGHT / 2 * 0.3 :
+        print("下端")
+        drone.set_throttle(0.7)
+    elif y < IMAGE_HEIGHT / 2 * 0.8 :
+        print("下中")
+        drone.set_throttle(-0.3)
+    elif y > IMAGE_HEIGHT - (IMAGE_HEIGHT / 2 * 0.3):
+            print("上端")
+            drone.set_throttle(-0.7)
+    elif y > IMAGE_HEIGHT - (IMAGE_HEIGHT / 2 * 0.8) : 
+            print("上中")
+            drone.set_throttle(0.3)
+    else : 
+            print("真ん中")
+            drone.set_throttle(0)
+
+    preX = x
+    preY = y
+
 def main():
     drone = tellopy.Tello()
     face_cascade = 'haarcascade_frontalface_default.xml'
@@ -48,6 +88,8 @@ def main():
                 for i, face_rect in enumerate(faces):
                     #ここが処理部分
                     cv2.rectangle(image, tuple([face_rect.left(),face_rect.top()]), tuple([face_rect.right(),face_rect.bottom()]), (0, 0,255), thickness=2)
+                    tracking(drone, gray, (int)((face_rect.right() - face_rect.left()) / 2), (int)((face_rect.top() - face_rect.bottom()) / 2))
+                    #tracking(drone, image, (int)(x + (w / 2)), (int)(y + (h / 2)))
                 cv2.imshow('Original', image)
                 #cv2.imshow('Gray', gray)
                 cv2.waitKey(1)
