@@ -7,11 +7,19 @@ import cv2.cv2 as cv2  # for avoidance of pylint error
 import numpy
 import time
 
+IMAGE_WIDTH = 960
+IMAGE_HEIGHT = 720
+
+# drone position
+drone_x = 480 # drone x position
+drone_y = 0 # drone y position
+drone_dis = 100 # drone depth position
+
+
+
 
 def tracking(drone, image, x, y):
-    global preX
-    global preY
-    print(x, " ", y)
+    print("x y = ", x, " ", y)
     cv2.rectangle(image, (x, y), (x+3, y+3), (255, 0, 255), 2)
     if x < IMAGE_WIDTH / 2 * 0.3 :
         print("左端")
@@ -45,14 +53,12 @@ def tracking(drone, image, x, y):
             print("真ん中")
             drone.set_throttle(0)
 
-    preX = x
-    preY = y
 
 def main():
     drone = tellopy.Tello()
-    face_cascade = 'haarcascade_frontalface_default.xml'
+    #face_cascade = 'haarcascade_frontalface_default.xml'
     face_dlib = dlib.get_frontal_face_detector()
-    cascade = cv2.CascadeClassifier(face_cascade)
+    #cascade = cv2.CascadeClassifier(face_cascade)
 
     try:
         drone.connect()
@@ -77,9 +83,7 @@ def main():
                     continue
                 start_time = time.time()
                 image = cv2.cvtColor(numpy.array(frame.to_image()), cv2.COLOR_RGB2BGR)
-                gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
                 # #カスケードファイルと使って顔認証
-                #faces = cascade.detectMultiScale(image)
                 faces = face_dlib(image, 1)
                 '''
                 for (x, y, w, h) in faces:
@@ -88,10 +92,8 @@ def main():
                 for i, face_rect in enumerate(faces):
                     #ここが処理部分
                     cv2.rectangle(image, tuple([face_rect.left(),face_rect.top()]), tuple([face_rect.right(),face_rect.bottom()]), (0, 0,255), thickness=2)
-                    tracking(drone, gray, (int)((face_rect.right() - face_rect.left()) / 2), (int)((face_rect.top() - face_rect.bottom()) / 2))
-                    #tracking(drone, image, (int)(x + (w / 2)), (int)(y + (h / 2)))
+                    tracking(drone, image, (int)((face_rect.right() - face_rect.left()) / 2), (int)((face_rect.top() - face_rect.bottom()) / 2))
                 cv2.imshow('Original', image)
-                #cv2.imshow('Gray', gray)
                 cv2.waitKey(1)
                 if frame.time_base < 1.0/60:
                     time_base = 1.0/60
