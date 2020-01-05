@@ -6,9 +6,13 @@ import av
 import cv2.cv2 as cv2  # for avoidance of pylint error
 import numpy
 import time
+from math import *
 
 IMAGE_WIDTH = 960
 IMAGE_HEIGHT = 720
+DRONE_DIS_LOWER = 90
+DRONE_DIS_UPPER = 120
+
 
 # drone position
 drone_x = 480 # drone x position
@@ -18,25 +22,26 @@ drone_dis = 100 # drone depth position
 
 
 
-def tracking(drone, image, x, y):
+def tracking(drone, image, x, y, dis):
     global IMGAE_WIDTH, IMAGE_HEIGHT
-    print("x y = ", x, " ", y)
+    global DRONE_DIS_LOWER, DRONE_DIS_UPPER
+    print("x y dis =", x, " ", y, " ", dis)
     cv2.rectangle(image, (x, y), (x+3, y+3), (255, 0, 255), 2)
     if x < IMAGE_WIDTH / 2 * 0.3 :
         print("左端")
-        drone.set_yaw(-0.7)
+        drone.set_roll(-0.7)
     elif x < IMAGE_WIDTH / 2 * 0.8 :
         print("左中")
-        drone.set_yaw(-0.3)
+        drone.set_roll(-0.3)
     elif x > IMAGE_WIDTH - (IMAGE_WIDTH / 2 * 0.3):
         print("右端")
-        drone.set_yaw(0.7)
+        drone.set_roll(0.7)
     elif x > IMAGE_WIDTH - (IMAGE_WIDTH / 2 * 0.8) : 
         print("右中")
-        drone.set_yaw(0.3)
+        drone.set_roll(0.3)
     else : 
         print("真ん中")
-        drone.set_yaw(0)
+        drone.set_roll(0)
 
     if y < IMAGE_HEIGHT / 2 * 0.3 :
         print("下端")
@@ -53,6 +58,17 @@ def tracking(drone, image, x, y):
     else : 
             print("真ん中")
             drone.set_throttle(0)
+    
+    if dis < DRONE_DIS_LOWER:
+        print("遠い")
+        drone.set_pitch(0.5)
+    elif dis < DRONE_DIS_UPPER:
+        print("ちょうどいい")
+        drone.set_pitch(0.0)
+    else:
+        print("近い")
+        drone.set_pitch(-0.5)
+
 
 
 def main():
@@ -85,17 +101,23 @@ def main():
                     continue
                 start_time = time.time()
                 image = cv2.cvtColor(numpy.array(frame.to_image()), cv2.COLOR_RGB2BGR)
+                #print(image.shape)
                 # #カスケードファイルと使って顔認証
                 faces = face_dlib(image, 1)
                 '''
                 for (x, y, w, h) in faces:
                     cv2.rectangle(image, (x,y),(x+w,y+h),(255,0,0),2)
                 '''
+                if len(faces) == 0:
+                    drone.set_pitch(0.0)
+                    drone.set_roll(0.0)
+                    drone.set_throttle(0.0)
                 for i, face_rect in enumerate(faces):
                     #ここが処理部分
                     cv2.rectangle(image, tuple([face_rect.left(),face_rect.top()]), tuple([face_rect.right(),face_rect.bottom()]), (0, 0,255), thickness=2)
                     tracking(drone, image, (int)((face_rect.right() + face_rect.left()) / 2), 
-                        (int)(IMAGE_HEIGHT - ((face_rect.top() + face_rect.bottom()) / 2)))
+                        (int)((face_rect.top() + face_rect.bottom()) / 2),
+                        sqrt((face_rect.right() - face_rect.left())*(face_rect.bottom() - face_rect.top())))
                 cv2.imshow('Original', image)
                 cv2.waitKey(1)
                 if frame.time_base < 1.0/60:

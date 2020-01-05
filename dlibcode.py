@@ -6,12 +6,13 @@ from math import *
 
 IMAGE_WIDTH = 640
 IMAGE_HEIGHT = 480
-DRONE_AREA = 400
+DRONE_DIS_LOWER = 60
+DRONE_DIS_UPPER = 90
 
 
-def tracking(image, x, y):
+def tracking(image, x, y, dis):
     global IMGAE_WIDTH, IMAGE_HEIGHT
-    print("x y = ", x, " ", y)
+    print("x y dis = ", x, " ", y, " ", dis)
     cv2.rectangle(image, (x-1, y-1), (x+2, y+2), (255, 0, 255), 2)
     if x < IMAGE_WIDTH / 2 * 0.3 :
         print("左端")
@@ -34,6 +35,13 @@ def tracking(image, x, y):
             print("上中")
     else : 
             print("真ん中")
+    
+    if dis < DRONE_DIS_LOWER:
+        print("遠い")
+    elif dis < DRONE_DIS_UPPER:
+        print("ちょうどいい")
+    else:
+        print("近い")
 
 
 def detect_video(detector, video_path, output_path=""):
@@ -71,8 +79,9 @@ def detect_video(detector, video_path, output_path=""):
             #ここが処理部分
             cv2.rectangle(frame, tuple([face_rect.left(),face_rect.top()]), tuple([face_rect.right(),face_rect.bottom()]), (0, 0,255), thickness=2)
             tracking(frame, (int)((face_rect.right() + face_rect.left()) / 2),
-                (int)((face_rect.top() + face_rect.bottom()) / 2))
-            print("顔の長さ ", sqrt((face_rect.right() - face_rect.left())*(face_rect.bottom() - face_rect.top())))
+                (int)((face_rect.top() + face_rect.bottom()) / 2),
+               sqrt((face_rect.right() - face_rect.left())*(face_rect.bottom() - face_rect.top())))
+            #print("顔の長さ ", sqrt((face_rect.right() - face_rect.left())*(face_rect.bottom() - face_rect.top())))
         #cv2.putText(result, text=fps, org=(3, 15), fontFace=cv2.FONT_HERSHEY_SIMPLEX,
 #                    fontScale=0.50, color=(255, 0, 0), thickness=2)
         #cv2.namedWindow("result", cv2.WINDOW_NORMAL)
