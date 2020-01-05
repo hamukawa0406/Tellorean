@@ -19,6 +19,7 @@ drone_dis = 100 # drone depth position
 
 
 def tracking(drone, image, x, y):
+    global IMGAE_WIDTH, IMAGE_HEIGHT
     print("x y = ", x, " ", y)
     cv2.rectangle(image, (x, y), (x+3, y+3), (255, 0, 255), 2)
     if x < IMAGE_WIDTH / 2 * 0.3 :
@@ -55,6 +56,7 @@ def tracking(drone, image, x, y):
 
 
 def main():
+    global IMGAE_WIDTH, IMAGE_HEIGHT
     drone = tellopy.Tello()
     #face_cascade = 'haarcascade_frontalface_default.xml'
     face_dlib = dlib.get_frontal_face_detector()
@@ -92,7 +94,8 @@ def main():
                 for i, face_rect in enumerate(faces):
                     #ここが処理部分
                     cv2.rectangle(image, tuple([face_rect.left(),face_rect.top()]), tuple([face_rect.right(),face_rect.bottom()]), (0, 0,255), thickness=2)
-                    tracking(drone, image, (int)((face_rect.right() - face_rect.left()) / 2), (int)((face_rect.top() - face_rect.bottom()) / 2))
+                    tracking(drone, image, (int)((face_rect.right() + face_rect.left()) / 2), 
+                        (int)(IMAGE_HEIGHT - ((face_rect.top() + face_rect.bottom()) / 2)))
                 cv2.imshow('Original', image)
                 cv2.waitKey(1)
                 if frame.time_base < 1.0/60:

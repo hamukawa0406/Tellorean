@@ -2,9 +2,42 @@ import dlib
 from skimage import io
 import cv2
 from timeit import default_timer as timer
+from math import *
+
+IMAGE_WIDTH = 640
+IMAGE_HEIGHT = 480
+DRONE_AREA = 400
+
+
+def tracking(image, x, y):
+    global IMGAE_WIDTH, IMAGE_HEIGHT
+    print("x y = ", x, " ", y)
+    cv2.rectangle(image, (x-1, y-1), (x+2, y+2), (255, 0, 255), 2)
+    if x < IMAGE_WIDTH / 2 * 0.3 :
+        print("左端")
+    elif x < IMAGE_WIDTH / 2 * 0.8 :
+        print("左中")
+    elif x > IMAGE_WIDTH - (IMAGE_WIDTH / 2 * 0.3):
+        print("右端")
+    elif x > IMAGE_WIDTH - (IMAGE_WIDTH / 2 * 0.8) : 
+        print("右中")
+    else : 
+        print("真ん中")
+
+    if y < IMAGE_HEIGHT / 2 * 0.3 :
+        print("下端")
+    elif y < IMAGE_HEIGHT / 2 * 0.8 :
+        print("下中")
+    elif y > IMAGE_HEIGHT - (IMAGE_HEIGHT / 2 * 0.3):
+            print("上端")
+    elif y > IMAGE_HEIGHT - (IMAGE_HEIGHT / 2 * 0.8) : 
+            print("上中")
+    else : 
+            print("真ん中")
 
 
 def detect_video(detector, video_path, output_path=""):
+    global IMGAE_WIDTH, IMAGE_HEIGHT
     vid = cv2.VideoCapture(video_path)
     if not vid.isOpened():
         raise IOError("Couldn't open webcam or video")
@@ -22,13 +55,14 @@ def detect_video(detector, video_path, output_path=""):
     prev_time = timer()
     while True:
         return_value, frame = vid.read()
-        print(type(frame))
+        #print(type(frame))
         result = detector(frame, 1)
         curr_time = timer()
         exec_time = curr_time - prev_time
         prev_time = curr_time
         accum_time = accum_time + exec_time
         curr_fps = curr_fps + 1
+        #print(frame.shape)
         if accum_time > 1:
             accum_time = accum_time - 1
             fps = "FPS: " + str(curr_fps)
@@ -36,6 +70,9 @@ def detect_video(detector, video_path, output_path=""):
         for i, face_rect in enumerate(result):
             #ここが処理部分
             cv2.rectangle(frame, tuple([face_rect.left(),face_rect.top()]), tuple([face_rect.right(),face_rect.bottom()]), (0, 0,255), thickness=2)
+            tracking(frame, (int)((face_rect.right() + face_rect.left()) / 2),
+                (int)((face_rect.top() + face_rect.bottom()) / 2))
+            print("顔の長さ ", sqrt((face_rect.right() - face_rect.left())*(face_rect.bottom() - face_rect.top())))
         #cv2.putText(result, text=fps, org=(3, 15), fontFace=cv2.FONT_HERSHEY_SIMPLEX,
 #                    fontScale=0.50, color=(255, 0, 0), thickness=2)
         #cv2.namedWindow("result", cv2.WINDOW_NORMAL)
@@ -50,7 +87,7 @@ def detect_video(detector, video_path, output_path=""):
 face_detector = dlib.get_frontal_face_detector()
 file_name = "pic1.jpg"    #ここに対象のファイル名を入力私の場合はpic1.jpgです
 image = cv2.imread(file_name)
-print(type(image))
+#print(type(image))
 detect_video(face_detector, 0)
 #detected_faces = face_detector(image, 1)
 '''
