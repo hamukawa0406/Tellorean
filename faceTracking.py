@@ -27,21 +27,21 @@ def tracking(drone, image, x, y, dis):
     global DRONE_DIS_LOWER, DRONE_DIS_UPPER
     print("x y dis =", x, " ", y, " ", dis)
     cv2.rectangle(image, (x, y), (x+3, y+3), (255, 0, 255), 2)
-    if x < IMAGE_WIDTH / 2 * 0.3 :
+    if x < IMAGE_WIDTH * 0.2 :
         print("左端")
         drone.set_roll(-0.7)
-    elif x < IMAGE_WIDTH / 2 * 0.8 :
+    elif x < IMAGE_WIDTH * 0.4 :
         print("左中")
         drone.set_roll(-0.3)
-    elif x > IMAGE_WIDTH - (IMAGE_WIDTH / 2 * 0.3):
-        print("右端")
-        drone.set_roll(0.7)
-    elif x > IMAGE_WIDTH - (IMAGE_WIDTH / 2 * 0.8) : 
+    elif x < IMAGE_WIDTH * 0.6:
+        print("真中")
+        drone.set_roll(0.0)
+    elif x < IMAGE_WIDTH * 0.8:
         print("右中")
         drone.set_roll(0.3)
-    else : 
-        print("真ん中")
-        drone.set_roll(0)
+    else:
+        print("右端")
+        drone.set_roll(0.7)
 
     if y < IMAGE_HEIGHT / 2 * 0.3 :
         print("下端")
@@ -74,9 +74,7 @@ def tracking(drone, image, x, y, dis):
 def main():
     global IMGAE_WIDTH, IMAGE_HEIGHT
     drone = tellopy.Tello()
-    #face_cascade = 'haarcascade_frontalface_default.xml'
     face_dlib = dlib.get_frontal_face_detector()
-    #cascade = cv2.CascadeClassifier(face_cascade)
 
     try:
         drone.connect()
@@ -101,7 +99,6 @@ def main():
                     continue
                 start_time = time.time()
                 image = cv2.cvtColor(numpy.array(frame.to_image()), cv2.COLOR_RGB2BGR)
-                #print(image.shape)
                 # #カスケードファイルと使って顔認証
                 faces = face_dlib(image, 1)
                 '''
