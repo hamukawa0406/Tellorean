@@ -7,7 +7,8 @@ import cv2.cv2 as cv2  # for avoidance of pylint error
 import numpy
 import time
 from math import *
-from concurrent.futures import ThreadPoolExecutor
+#from concurrent.futures import ThreadPoolExecutor
+from multiprocessing import Process, Queue
 
 
 IMAGE_WIDTH = 960
@@ -26,36 +27,36 @@ def tracking(drone, image, x, y, dis):
     #左右方向の制御
     if x < IMAGE_WIDTH * 0.2 :
         print("左端")
-        drone.left(20)
-        #drone.set_roll(-0.3)
+        #drone.left(20)
+        drone.set_roll(-0.3)
     elif x < IMAGE_WIDTH * 0.4 :
         print("左中")
-        drone.left(10)
-        #drone.set_roll(-0.1)
+        #drone.left(10)
+        drone.set_roll(-0.1)
     elif x < IMAGE_WIDTH * 0.6:
         print("真中")
-        #drone.set_roll(0.0)
+        drone.set_roll(0.0)
     elif x < IMAGE_WIDTH * 0.8:
         print("右中")
-        drone.right(10)
-        #drone.set_roll(0.1)
+        #drone.right(10)
+        drone.set_roll(0.1)
     else:
         print("右端")
-        drone.right(20)
-        #drone.set_roll(0.3)
+        #drone.right(20)
+        drone.set_roll(0.3)
 
     #上下方向の制御
     if y < IMAGE_HEIGHT / 2 * 0.3 :
-        print("下端")
+        print("上端")
         drone.set_throttle(0.3)
     elif y < IMAGE_HEIGHT / 2 * 0.8 :
-        print("下中")
+        print("上中")
         drone.set_throttle(0.2)
     elif y > IMAGE_HEIGHT - (IMAGE_HEIGHT / 2 * 0.3):
-            print("上端")
+            print("下端")
             drone.set_throttle(-0.3)
     elif y > IMAGE_HEIGHT - (IMAGE_HEIGHT / 2 * 0.8) : 
-            print("上中")
+            print("下中")
             drone.set_throttle(-0.2)
     else : 
             print("真ん中")
@@ -64,15 +65,22 @@ def tracking(drone, image, x, y, dis):
     #前後方向の制御
     if dis < DRONE_DIS_LOWER:
         print("遠い")
-        drone.forward(20)
-        #drone.set_pitch(0.3)
+        #drone.forward(20)
+        drone.set_pitch(0.3)
     elif dis < DRONE_DIS_UPPER:
         print("ちょうどいい")
-        #drone.set_pitch(0.0)
+        drone.set_pitch(0.0)
     else:
         print("近い")
-        drone.backward(20)
-        #drone.set_pitch(-0.3)
+        #drone.backward(20)
+        drone.set_pitch(-0.3)
+
+def detect(que, faceDlib, image):
+    faces = []
+    faces = faceDlib(image, 1)
+    que.put(faces)
+#    future = executor.submit(face_dlib, image, 1)
+ 
 
 
 
@@ -83,7 +91,7 @@ def main():
     drone = tellopy.Tello()
     face_dlib = dlib.get_frontal_face_detector()
     isDrone = False
-    executor = ThreadPoolExecutor(max_workers=5)
+    #executor = ThreadPoolExecutor(max_workers=3)
 
     try:
         drone.connect()
@@ -105,6 +113,7 @@ def main():
         noDrone = time.time()
         futures  = []
         faces = []
+        que = Queue()
         
         while True:
             for frame in container.decode(video=0):
@@ -114,11 +123,24 @@ def main():
                 start_time = time.time()
                 image = cv2.cvtColor(numpy.array(frame.to_image()), cv2.COLOR_RGB2BGR)
                 #faces = face_dlib(image, 1)
-                future = executor.submit(face_dlib, image, 1)
+
+                #future = executor.submit(detect, que, face_dlib, image)
+                future = Process(target=detect, args=(que, face_dlib, image,))
+                future.start()
                 futures.append(future)
+
+                #futures.append(future)
+                #que.put(future)
+                if que.empty() == False:
+                    faces = que.get() 
+                    
+                else:
+                    faces = []
+                """
                 for future in futures:
                     if future.done() == True:
                         faces = future.result()
+                """
                 
                 if len(faces) == 0:
                     isDrone = None
@@ -138,7 +160,6 @@ def main():
                 cv2.waitKey(1)
 
                # print(preDrone, " ", isDrone)
-
                 if preDrone == True and isDrone == None:
                     #print("KKKEEEEEEEE")
                     noDrone = time.time()
@@ -148,6 +169,7 @@ def main():
                     if timer > 10:
                     #    print("asdlfjka;ASDFSDGG")
                         drone.land()
+                
 
                 preDrone = isDrone
 
