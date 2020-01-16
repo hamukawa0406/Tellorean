@@ -1,0 +1,110 @@
+{
+  "editor.wordSeparators": "./\\()\"'-:,.;<>~!@#$%^&*|+=[]{}`~?　、。「」【】『』（）！？てにをはがのともへでや",
+
+  // latex-workshop.latex.tools: Tool の定義
+  "latex-workshop.latex.tools": [
+      {
+          "command": "ptex2pdf",
+          "args": [
+              "-l",
+              "-ot",
+              "-kanji=utf8 -synctex=1",
+              "-interaction=nonstopmode",
+              "%DOC%"
+          ],
+          "name": "ptex2pdf (platex)"
+      },
+      {
+          "command": "ptex2pdf",
+          "args": [
+              "-l",
+              "-u",
+              "-ot",
+              "-kanji=utf8 -synctex=1",
+              "-interaction=nonstopmode",
+              "%DOC%"
+          ],
+          "name": "Step 1: ptex2pdf (uplatex)"
+      },
+      {
+          "command": "upbibtex",
+          "args": [
+              "%DOCFILE%",
+              "-kanji=utf8"
+          ],
+          "name": "Step 2: upbibtex"
+      },
+      {
+          "command": "ptex2pdf",
+          "args": [
+              "-l",
+              "-u",
+              "-ot",
+              "-kanji=utf8 -synctex=1",
+              "-interaction=nonstopmode",
+              "%DOC%"
+          ],
+          "name": "Step 3: ptex2pdf (uplatex)"
+      },
+      {
+          "command": "ptex2pdf",
+          "args": [
+              "-l",
+              "-u",
+              "-ot",
+              "-kanji=utf8 -synctex=1",
+              "-interaction=nonstopmode",
+              "%DOC%"
+          ],
+          "name": "Step 4: ptex2pdf (uplatex)"
+      }
+  ],
+
+  // latex-workshop.latex.recipes: recipeの定義
+  "latex-workshop.latex.recipes": [
+      {
+          "name": "bib_fig",
+          "tools": [
+              "Step 1: ptex2pdf (uplatex)",
+              "Step 2: upbibtex",
+              "Step 3: ptex2pdf (uplatex)",
+              "Step 4: ptex2pdf (uplatex)"
+          ]
+      },
+      {
+          "name": "nobib_fig (uplatex)",
+          "tools": [
+              "Step 1: ptex2pdf (uplatex)",
+              "Step 1: ptex2pdf (uplatex)"
+          ]
+          },
+      {
+          "name": "nobib_fig (platex)",
+          "tools": [
+              "ptex2pdf (platex)",
+              "ptex2pdf (platex)"
+          ]
+      },
+      {
+          "name": "nobib_nofig (uplatex)",
+          "tools": [
+              "Step 1: ptex2pdf (uplatex)"
+          ]
+      },
+      {
+          "name": "nobib_nofig (platex)",
+          "tools": [
+              "ptex2pdf (platex)"
+          ]
+      }         
+  ],
+
+  "latex-workshop.latex.clean.fileTypes": [
+      "*.aux", "*.bbl", "*.blg", "*.idx", "*.ind", "*.lof", "*.lot", "*.out", "*.toc", "*.acn", "*.acr", "*.alg", "*.glg", "*.glo", "*.gls", "*.ist", "*.fls", "*.log", "*.fdb_latexmk", "*.synctex.gz", "_minted*", "*.nav", "*.snm", "*.vrb",
+  ],
+
+  "latex-workshop.view.pdf.viewer": "tab",
+//  "latex-workshop.latex.autoBuild.run": "never",
+  "latex-workshop.latex.autoClean.run": "onFailed"
+}
+
