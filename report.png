@@ -1,0 +1,21 @@
+\documentclass{jsarticle}
+\usepackage[dvipdfmx]{graphics}
+
+\title{情報特論}
+\author{32番　松川侑生}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{目的}
+    Tello EDUの単眼カメラとDlibの顔検出を利用して顔追跡をおこなう。
+\section{開発環境}
+    Tello EDU\\
+    ノートパソコン\\
+\section{設計仕様}
+    aaaaaaaaaaaaaaaa
+\section{開発結果}
+\section{考察}
+asdfg a
+\end{document}
