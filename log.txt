@@ -1,0 +1,282 @@
+Tello: 16:14:25.416:  Info: start video thread
+Tello: 16:14:25.659:  Info: send connection request (cmd="conn_req:9617")
+Tello: 16:14:25.661:  Info: state transit State::disconnected -> State::connecting
+Tello: 16:14:25.661:  Info: video receive buffer size = 524288
+Tello: 16:14:25.681:  Info: connected. (port=9617)
+Tello: 16:14:25.681:  Info: send_time (cmd=0x46 seq=0x01e4)
+Tello: 16:14:25.681:  Info: state transit State::connecting -> State::connected
+Tello: 16:14:25.681:  Info: get video stream
+Tello: 16:14:25.682:  Info: start video (cmd=0x25 seq=0x01e4)
+Tello: 16:14:25.732:  Info: recv: ack: cmd=0x34 seq=0x0000 cc 60 00 27 90 34 00 00 00 00 72 a5
+Tello: 16:14:25.732:  Info: recv: ack: cmd=0x20 seq=0x0000 cc 60 00 27 b0 20 00 00 00 00 42 b9
+Tello: 16:14:25.732:  Info: recv: ack: cmd=0x34 seq=0x0000 cc 60 00 27 90 34 00 00 00 00 72 a5
+Tello: 16:14:25.733:  Info: recv: ack: cmd=0x20 seq=0x0000 cc 60 00 27 b0 20 00 00 00 00 42 b9
+Tello: 16:14:28.662:  Info: video data 1128137 bytes 550.7KB/sec
+Tello: 16:14:30.664:  Info: video data 751120 bytes 366.4KB/sec
+Tello: 16:14:32.666:  Info: video data 754117 bytes 367.9KB/sec
+Tello: 16:14:34.105:  Info: set altitude limit 30m
+Tello: 16:14:34.106:  Info: takeoff (cmd=0x54 seq=0x01e4)
+Tello: 16:14:34.149:  Info: recv: ack: cmd=0x54 seq=0x0000 cc 60 00 27 b0 54 00 00 00 00 a1 81
+Tello: 16:14:34.668:  Info: video data 753949 bytes 367.7KB/sec
+Tello: 16:14:36.670:  Info: video data 748134 bytes 365.0KB/sec
+Tello: 16:14:38.670:  Info: video data 758539 bytes 370.3KB/sec
+x y dis = 503   336   107.0
+真中
+真ん中
+ちょうどいい
+x y dis = 515   301   107.49883720301351
+真中
+真ん中
+ちょうどいい
+Tello: 16:14:40.695:  Info: video data 753321 bytes 363.2KB/sec
+x y dis = 503   241   107.49883720301351
+真中
+下中
+Tello: 16:14:41.041:  Info: set_throttle(val=0.20)
+ちょうどいい
+x y dis = 491   145   107.0
+真中
+下中
+ちょうどいい
+Tello: 16:14:42.696:  Info: video data 751109 bytes 366.7KB/sec
+x y dis = 515   265   107.49883720301351
+真中
+下中
+ちょうどいい
+Tello: 16:14:44.698:  Info: video data 751196 bytes 366.4KB/sec
+x y dis = 491   181   107.0
+真中
+下中
+ちょうどいい
+Tello: 16:14:46.701:  Info: video data 759977 bytes 370.6KB/sec
+x y dis = 479   169   107.0
+真中
+下中
+ちょうどいい
+x y dis = 491   253   107.49883720301351
+真中
+下中
+ちょうどいい
+Tello: 16:14:48.702:  Info: video data 749394 bytes 365.7KB/sec
+x y dis = 509   340   90.0
+真中
+真ん中
+Tello: 16:14:49.709:  Info: set_throttle(val=0.00)
+ちょうどいい
+Tello: 16:14:50.734:  Info: video data 756348 bytes 363.5KB/sec
+x y dis = 499   419   89.49860334105779
+真中
+真ん中
+遠い
+Tello: 16:14:51.127:  Info: set_pitch(val=0.30)
+x y dis = 499   479   89.49860334105779
+真中
+上中
+Tello: 16:14:52.527:  Info: set_throttle(val=-0.20)
+遠い
+Tello: 16:14:52.735:  Info: video data 757041 bytes 369.5KB/sec
+x y dis = 509   469   89.49860334105779
+真中
+上中
+遠い
+Tello: 16:14:54.735:  Info: video data 745295 bytes 363.8KB/sec
+x y dis = 519   623   154.49919093639292
+真中
+上端
+Tello: 16:14:55.412:  Info: set_throttle(val=-0.30)
+近い
+Tello: 16:14:55.412:  Info: set_pitch(val=-0.30)
+Tello: 16:14:56.737:  Info: video data 757105 bytes 369.4KB/sec
+Tello: 16:14:56.859:  Info: set_pitch(val=0.00)
+Tello: 16:14:56.859:  Info: set_throttle(val=0.00)
+Tello: 16:14:58.738:  Info: video data 755090 bytes 368.6KB/sec
+Tello: 16:15:00.742:  Info: video data 749880 bytes 365.4KB/sec
+x y dis = 417   77   195.74473172987314
+真中
+下端
+Tello: 16:15:01.237:  Info: set_throttle(val=0.30)
+近い
+Tello: 16:15:01.237:  Info: set_pitch(val=-0.30)
+x y dis = 476   93   235.16802503741872
+真中
+下端
+近い
+Tello: 16:15:02.744:  Info: video data 749657 bytes 365.7KB/sec
+x y dis = 582   191   186.0
+右中
+Tello: 16:15:04.159:  Info: set_roll(val=0.10)
+下中
+Tello: 16:15:04.159:  Info: set_throttle(val=0.20)
+近い
+Tello: 16:15:04.762:  Info: video data 755833 bytes 365.7KB/sec
+x y dis = 539   324   107.49883720301351
+真中
+Tello: 16:15:05.603:  Info: set_roll(val=0.00)
+真ん中
+Tello: 16:15:05.603:  Info: set_throttle(val=0.00)
+ちょうどいい
+Tello: 16:15:05.603:  Info: set_pitch(val=0.00)
+Tello: 16:15:06.763:  Info: video data 751453 bytes 366.9KB/sec
+x y dis = 463   353   62.0
+真中
+真ん中
+遠い
+Tello: 16:15:07.041:  Info: set_pitch(val=0.30)
+x y dis = 421   326   43.0
+真中
+真ん中
+遠い
+Tello: 16:15:08.766:  Info: video data 750769 bytes 365.9KB/sec
+x y dis = 417   307   43.497126341863094
+真中
+真ん中
+遠い
+Tello: 16:15:10.767:  Info: video data 757099 bytes 369.5KB/sec
+x y dis = 409   352   52.0
+真中
+真ん中
+遠い
+Tello: 16:15:12.771:  Info: video data 747061 bytes 364.1KB/sec
+x y dis = 415   443   62.0
+真中
+上中
+Tello: 16:15:12.845:  Info: set_throttle(val=-0.20)
+遠い
+x y dis = 403   619   129.0
+真中
+上端
+Tello: 16:15:14.285:  Info: set_throttle(val=-0.30)
+ちょうどいい
+Tello: 16:15:14.285:  Info: set_pitch(val=0.00)
+Tello: 16:15:14.798:  Info: video data 762215 bytes 367.1KB/sec
+Tello: 16:15:15.678:  Info: set_throttle(val=0.00)
+Tello: 16:15:16.828:  Info: video data 750542 bytes 361.1KB/sec
+Tello: 16:15:18.832:  Info: video data 765576 bytes 373.1KB/sec
+Tello: 16:15:20.833:  Info: video data 756867 bytes 369.4KB/sec
+x y dis = 268   568   385.0
+左中
+Tello: 16:15:21.373:  Info: set_roll(val=-0.10)
+上中
+Tello: 16:15:21.373:  Info: set_throttle(val=-0.20)
+近い
+Tello: 16:15:21.373:  Info: set_pitch(val=-0.30)
+x y dis = 396   568   385.0
+真中
+Tello: 16:15:22.794:  Info: set_roll(val=0.00)
+上中
+近い
+Tello: 16:15:22.835:  Info: video data 743950 bytes 362.8KB/sec
+x y dis = 401   437   321.0
+真中
+上中
+近い
+Tello: 16:15:24.837:  Info: video data 758337 bytes 370.0KB/sec
+x y dis = 389   232   129.0
+真中
+下中
+Tello: 16:15:25.638:  Info: set_throttle(val=0.20)
+ちょうどいい
+Tello: 16:15:25.638:  Info: set_pitch(val=0.00)
+Tello: 16:15:26.861:  Info: video data 755481 bytes 364.6KB/sec
+x y dis = 467   181   107.0
+真中
+下中
+ちょうどいい
+x y dis = 439   151   90.0
+真中
+下中
+ちょうどいい
+Tello: 16:15:28.864:  Info: video data 751371 bytes 366.3KB/sec
+x y dis = 449   194   62.49799996799898
+真中
+下中
+遠い
+Tello: 16:15:29.891:  Info: set_pitch(val=0.30)
+Tello: 16:15:30.864:  Info: video data 751071 bytes 366.7KB/sec
+x y dis = 423   266   75.0
+真中
+下中
+遠い
+x y dis = 443   360   107.0
+真中
+真ん中
+Tello: 16:15:32.721:  Info: set_throttle(val=0.00)
+ちょうどいい
+Tello: 16:15:32.721:  Info: set_pitch(val=0.00)
+Tello: 16:15:32.868:  Info: video data 751204 bytes 366.1KB/sec
+x y dis = 519   623   154.49919093639292
+真中
+上端
+Tello: 16:15:34.164:  Info: set_throttle(val=-0.30)
+近い
+Tello: 16:15:34.164:  Info: set_pitch(val=-0.30)
+Tello: 16:15:34.869:  Info: video data 761365 bytes 371.5KB/sec
+Tello: 16:15:35.599:  Info: set_pitch(val=0.00)
+Tello: 16:15:35.599:  Info: set_throttle(val=0.00)
+Tello: 16:15:36.896:  Info: video data 753226 bytes 363.0KB/sec
+Tello: 16:15:38.896:  Info: video data 756712 bytes 369.4KB/sec
+Tello: 16:15:40.897:  Info: video data 752539 bytes 367.3KB/sec
+Tello: 16:15:42.898:  Info: video data 755090 bytes 368.5KB/sec
+Tello: 16:15:44.899:  Info: video data 745587 bytes 363.9KB/sec
+Tello: 16:15:45.646:  Info: land (cmd=0x55 seq=0x01e4)
+Tello: 16:15:45.691:  Info: recv: ack: cmd=0x55 seq=0x0000 cc 60 00 27 b0 55 00 00 00 00 e5 8a
+Tello: 16:15:46.899:  Info: video data 745604 bytes 364.0KB/sec
+Tello: 16:15:47.109:  Info: land (cmd=0x55 seq=0x01e4)
+Tello: 16:15:47.130:  Info: recv: ack: cmd=0x55 seq=0x0000 cc 60 00 27 b0 55 00 00 00 00 e5 8a
+Tello: 16:15:48.511:  Info: land (cmd=0x55 seq=0x01e4)
+Tello: 16:15:48.547:  Info: recv: ack: cmd=0x55 seq=0x0000 cc 60 00 27 b0 55 00 00 00 00 e5 8a
+Tello: 16:15:48.903:  Info: video data 750420 bytes 365.7KB/sec
+Tello: 16:15:49.903:  Info: land (cmd=0x55 seq=0x01e4)
+Tello: 16:15:49.935:  Info: recv: ack: cmd=0x55 seq=0x0000 cc 60 00 27 b0 55 00 00 00 00 e5 8a
+Tello: 16:15:50.924:  Info: video data 762799 bytes 368.6KB/sec loss=1
+Tello: 16:15:51.337:  Info: land (cmd=0x55 seq=0x01e4)
+Tello: 16:15:51.358:  Info: recv: ack: cmd=0x55 seq=0x0000 cc 60 00 27 b0 55 00 00 00 00 e5 8a
+Tello: 16:15:52.790:  Info: land (cmd=0x55 seq=0x01e4)
+Tello: 16:15:52.837:  Info: recv: ack: cmd=0x55 seq=0x0000 cc 60 00 27 b0 55 00 00 00 00 e5 8a
+Tello: 16:15:52.931:  Info: video data 751019 bytes 365.4KB/sec
+Tello: 16:15:54.228:  Info: land (cmd=0x55 seq=0x01e4)
+Tello: 16:15:54.266:  Info: recv: ack: cmd=0x55 seq=0x0000 cc 60 00 27 b0 55 00 00 00 00 e5 8a
+Tello: 16:15:54.935:  Info: video data 751095 bytes 366.0KB/sec
+Tello: 16:15:55.639:  Info: land (cmd=0x55 seq=0x01e4)
+Tello: 16:15:55.690:  Info: recv: ack: cmd=0x55 seq=0x0000 cc 60 00 27 b0 55 00 00 00 00 e5 8a
+Tello: 16:15:56.964:  Info: video data 763782 bytes 367.6KB/sec
+Tello: 16:15:57.043:  Info: land (cmd=0x55 seq=0x01e4)
+Tello: 16:15:57.067:  Info: recv: ack: cmd=0x55 seq=0x0000 cc 60 00 27 b0 55 00 00 00 00 e5 8a
+Tello: 16:15:58.484:  Info: land (cmd=0x55 seq=0x01e4)
+Tello: 16:15:58.503:  Info: recv: ack: cmd=0x55 seq=0x0000 cc 60 00 27 b0 55 00 00 00 00 e5 8a
+Tello: 16:15:58.971:  Info: video data 756887 bytes 368.3KB/sec
+Tello: 16:15:59.915:  Info: land (cmd=0x55 seq=0x01e4)
+Tello: 16:15:59.926:  Info: recv: ack: cmd=0x55 seq=0x0000 cc 60 00 27 b0 55 00 00 00 00 e5 8a
+Tello: 16:16:00.996:  Info: video data 757901 bytes 365.5KB/sec
+Tello: 16:16:01.329:  Info: land (cmd=0x55 seq=0x01e4)
+Tello: 16:16:01.357:  Info: recv: ack: cmd=0x55 seq=0x0000 cc 60 00 27 b0 55 00 00 00 00 e5 8a
+Tello: 16:16:02.739:  Info: land (cmd=0x55 seq=0x01e4)
+Tello: 16:16:02.780:  Info: recv: ack: cmd=0x55 seq=0x0000 cc 60 00 27 b0 55 00 00 00 00 e5 8a
+Tello: 16:16:02.997:  Info: video data 752193 bytes 367.1KB/sec
+Tello: 16:16:04.180:  Info: land (cmd=0x55 seq=0x01e4)
+Tello: 16:16:04.216:  Info: recv: ack: cmd=0x55 seq=0x0000 cc 60 00 27 b0 55 00 00 00 00 e5 8a
+Tello: 16:16:05.002:  Info: video data 755998 bytes 368.3KB/sec
+Tello: 16:16:05.614:  Info: land (cmd=0x55 seq=0x01e4)
+Tello: 16:16:05.637:  Info: recv: ack: cmd=0x55 seq=0x0000 cc 60 00 27 b0 55 00 00 00 00 e5 8a
+Tello: 16:16:07.003:  Info: video data 751049 bytes 366.6KB/sec
+Tello: 16:16:07.038:  Info: land (cmd=0x55 seq=0x01e4)
+Tello: 16:16:07.062:  Info: recv: ack: cmd=0x55 seq=0x0000 cc 60 00 27 b0 55 00 00 00 00 e5 8a
+Tello: 16:16:08.442:  Info: land (cmd=0x55 seq=0x01e4)
+Tello: 16:16:08.495:  Info: recv: ack: cmd=0x55 seq=0x0000 cc 60 00 27 b0 55 00 00 00 00 e5 8a
+Tello: 16:16:09.025:  Info: video data 757717 bytes 365.8KB/sec
+Tello: 16:16:09.868:  Info: land (cmd=0x55 seq=0x01e4)
+Tello: 16:16:09.921:  Info: recv: ack: cmd=0x55 seq=0x0000 cc 60 00 27 b0 55 00 00 00 00 e5 8a
+Tello: 16:16:11.029:  Info: video data 751024 bytes 366.0KB/sec
+Tello: 16:16:11.301:  Info: land (cmd=0x55 seq=0x01e4)
+Tello: 16:16:11.349:  Info: recv: ack: cmd=0x55 seq=0x0000 cc 60 00 27 b0 55 00 00 00 00 e5 8a
+Tello: 16:16:12.718:  Info: land (cmd=0x55 seq=0x01e4)
+Tello: 16:16:14.475: Error: recv: timeout
+Tello: 16:16:14.475:  Info: send connection request (cmd="conn_req:9617")
+Tello: 16:16:14.475:  Info: state transit State::connected -> State::connecting
+Tello: 16:16:14.475:  Info: VideoStream.handle_event(DISCONNECTED)
+[Errno 541478725] End of file
+Tello: 16:16:14.490:  Info: quit
+Tello: 16:16:14.490:  Info: state transit State::connecting -> State::quit
+Tello: 16:16:16.476:  Info: exit from the recv thread.
+Tello: 16:16:17.497: Error: video recv: timeout
+Tello: 16:16:17.497:  Info: exit from the video thread.
